@@ -1,0 +1,39 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+<div class="jumbotron">
+    <h1>Hey User, LogIn Here!!</h1>
+    <p>if you are excited and want to write some blogs please login here.......</p>
+</div>
+<div class="jumbotron">
+    <div class="container">
+        <p>
+            {%if messages%}
+            {%for message in messages%}
+                <p>{{message}}</p>
+            {%endfor%}
+            {%endif%}
+        </p>
+        <form method="POST">
+            {%csrf_token%}
+            <!--Email and Username-->
+              <div class="form-group col-md-6">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name='username' id="username">
+              </div>
+            <!--Password Fields-->
+            <div class="form-group col-md-6">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Enter your Password">
+            </div>
+            <!-- Password Fields ended -->   
+            <p>
+              No account?
+              <a href="{%url 'signup'%}">Create new account</a>
+            </p>   
+            <button type="submit" name = "submit" class="btn btn-primary">Login</button>
+          </form>
+      </div>
+  </div>
+{%endblock%}

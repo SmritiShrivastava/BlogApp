@@ -1,0 +1,44 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div class="jumbotron">
+    <p>
+        {%if messages%}
+        {%for message in messages%}
+            <p>{{message}}</p>
+        {%endfor%}
+        {%endif%}
+    </p>
+    <center>
+        <div class="container">
+            <h2>Hey {{usermodel.username}}</h2>
+            <p class="count">
+                <span style="color:rgb(90, 90, 161);">Total Blogs written :</span>{{sum1}}
+            </p>
+            <p class="contact">
+               <span>Contact Number:</span> {{usermodel.contactNumber}}
+            </p>
+        </div>
+    </center>
+    <hr>
+    <div class="jumbotron">
+        {%if blogmodel%}
+            {%for blog in blogmodel%}
+                <div class="container">
+                    <h3>{{blog.blogTitle}}</h3>
+                    <p>
+                        <a href="{%url 'detail' blog.id%}">
+                            <button type="button" class="btn btn-info" style="margin-left: 100px;">
+                                Details
+                            </button>
+                        </a>
+                    </p>
+                    <hr>
+                </div>
+            {%endfor%}
+        {%endif%}
+    </div>
+
+</div>
+
+{%endblock%}

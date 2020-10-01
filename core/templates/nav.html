@@ -1,0 +1,42 @@
+<!--Nav bar start-->
+  <!-- Image and text -->
+  {%load static%}
+  <nav class="navbar navbar-light" style="background-color: #eaeef1;">
+    <a class="navbar-brand" href="#">
+      <img src="{%static 'image_icon/pikachu.png'%}" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+      Blog App
+    </a>
+    <form method="POST" action="{%url 'search'%}" class="form-inline">
+      {%csrf_token%}
+        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-info my-2 my-sm-0" name="submit" type="submit">Search</button>
+    </form>
+    {%if request.user.is_authenticated%}
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link active" href="{%url 'home'%}">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'profile'%}">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'write'%}">Write Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'logout'%}">logout</a>
+        </li>
+      </ul>
+    {%else%}
+      <ul class="nav justify-content-end">
+        <li class="nav-item active">
+          <a class="nav-link" href="{%url 'home'%}">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'login'%}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'signup'%}">Sign up</a>
+        </li>
+      </ul>
+    {%endif%}
+  </nav>

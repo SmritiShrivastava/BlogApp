@@ -1,0 +1,80 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Hey User</h1>
+      <p class="lead">Do you want to write beautiful blogs, Please consider to join our community by simply signing up</p>
+    </div>
+  </div>
+  <div class = "jumbotron">
+      <div class="container">
+        <p>
+          {%if messages%}
+          {%for message in messages%}
+          <p>
+            {{message}}
+          </p>
+          {%endfor%}
+          {%endif%}
+        </p>
+        <form method="POST">
+            {%csrf_token%}
+            <!--Email and Username-->
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name='username' id="username">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name='email' id="email">
+              </div>
+            </div>
+            <!--Email and Username ended-->
+            <!--First Name and Last Name-->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="first">First Name</label>
+                  <input type="text" class="form-control" name='first_name' id="first">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="last_name">Last Name</label>
+                  <input type="text" class="form-control" name='last_name' id="last_name">
+                </div>
+              </div>
+            <!--First Name and Last Name Ended-->
+            
+            <!--Contact and gender-->
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="contact">Contact Number</label>
+                <input type="tel" class="form-control" name = "contact_number" id="contact">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" class="form-control">
+                  <option value = "select" selected>select</option>
+                  <option value = "Male">Male</option>
+                  <option value = "Female">Female</option>
+                  <option value = "Others">other</option>
+                </select>
+              </div>
+            </div>
+            <!--Contact and gender End-->
+            <!--Password Fields-->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your Password">
+              </div>
+              <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" class="form-control" name= "confirm_password" id="confirm_password" placeholder="Confirm your password">
+              </div>
+              <!-- Password Fields ended -->
+            <button type="submit" name = "submit" class="btn btn-success">Sign up</button>
+          </form>
+      </div>
+  </div>
+{%endblock%}
+

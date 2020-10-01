@@ -1,0 +1,47 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>Hey, {{user.username}}</h1>
+    </div>
+    {%if messages%}
+    {%for message in messages%}
+    <div class="container">
+        <p>{{message}}</p>
+    </div>
+    {%endfor%}
+    {%endif%}
+    <hr>
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            <div class="form-group">
+                <label for="blogTitle">Blog Title</label>
+                <input type="text" name="blogTitle" class="form-control" id="blogTitle" placeholder="Please Enter the blog Title">
+              </div>
+              <div class="form-group">
+                  <label for="blogDescription">Blog Description</label>
+                  <input type="text" name="blogDescription" class="form-control" id="blogDescription" placeholder="Please Enter the blog description">
+                  <small> Please be short and precise in Blog Description</small>
+              </div>
+              <div class="form-group">
+                  <label for="blogImage">Blog Image</label>
+                  <input type="file" name="blogImage" class="form-control" id="blogImage">
+                  <small> It is a must field</small>
+              </div>
+              <div class="form-group">
+                  <label for="location">Location</label>
+                  <input type="text" name="location" class="form-control" id="location">
+              </div>
+              <div class="form-group">
+                <label for="blogContent">Content</label>
+                <textarea type="text" class="form-control" name ="blogContent" id="blogContent" placeholder="Content"></textarea>
+              </div>
+              <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+{%endblock%}

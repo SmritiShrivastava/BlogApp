@@ -1,0 +1,68 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div class="jumbotron">
+    <div class="container">
+        <p>
+            {%if messages%}
+            {%for message in messages%}
+                <p>{{message}}</p>
+            {%endfor%}
+            {%endif%}
+        </p>
+        <center>
+            <h1>Author: {{blogmodel.user.firstName}} {{blogmodel.user.lastName}}</h1>
+            <p><span>Ph. no: {{blogmodel.user.contactNumber}}</span></p>
+            {%if blogmodel.location%}
+                <p>
+                    {{blogmodel.location}}
+                </p>
+            {%endif%}
+            <hr>
+            <h3>Title: {{blogmodel.blogTitle}}</h3>
+            <div>
+                    {%if blogmodel.blogImage%}
+                        <img src="{{blogmodel.blogImage.url}}" alt="{{blogmodel.blogTitle}}">
+                    {%else%}
+                    <p>No image Found</p>
+                    {%endif%}
+            </div>
+            <p>Description: {{blogmodel.blogDescription}}</p>
+            <p><small>{{blogmodel.blogContent}}</small></p>
+            <p>{{blogmodel.created}}</p>
+            <div class="container">
+                <a href="{%url 'like' blogmodel.id%}">
+                    <button>like</button>
+                </a>
+                <p>Likes: {{likes}}</p>
+                <p>Comments: {{no_of_comments}}</p>
+            </div>
+            <div class="container">
+                <form method="post">
+                    {%csrf_token%}
+                    <div class="form-group col-4">
+                        <label for="comment">Comment</label>
+                        <input type="text" name="comment" class="form-control" id="comment" placeholder="Comment">
+                    </div>
+                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>  
+                </form>
+                <hr>
+                <h3>Comments</h3>
+                {%if comments%}
+                    {%for comment in comments%}
+                    <div>
+                            <p>
+                                {{comment.user.username}} <small>:</small>
+                                    {{comment.comment}} <br>
+                                    Created on: {{comment.created}}
+                            </p>
+        
+                        <hr>
+                    </div>
+                    {%endfor%}
+                {%endif%}
+            </div>
+        </center>
+    </div>
+</div>
+{%endblock%}
